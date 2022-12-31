@@ -1,0 +1,21 @@
+{
+  "name": "hashing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sha256.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Sumitjh26997",
+  "license": "ISC",
+  "dependencies": {
+    "ethereum-cryptography": "^1.1.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}

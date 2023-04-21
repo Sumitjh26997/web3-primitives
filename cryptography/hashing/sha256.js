@@ -6,14 +6,7 @@ const COLORS = ['red', 'green', 'blue', 'yellow', 'pink', 'orange'];
 
 // given a hash, return the color that created the hash
 function findColor(hash) {
-    let colorMatch;
-    COLORS.forEach((element) => {
-        if(toHex(hash) === toHex(sha256(utf8ToBytes(element))))
-            colorMatch = element;
-            return;
-    });
-
-    return colorMatch;
+    return COLORS.find(color => toHex(hash) === toHex(sha256(utf8ToBytes(color))));
 }
 
 module.exports = findColor;

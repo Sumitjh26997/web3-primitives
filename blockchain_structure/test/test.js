@@ -18,8 +18,10 @@ describe('Hash Data', function() {
 	it('should hash some random data', function() {
 			const prevHash = "0xf"
 			const myEmail = "sumit.hotchandani@gmail.com";
+			const testBlock = new Block(myEmail);
+			testBlock.previousHash = prevHash;
 			const myHash = SHA256(myEmail+prevHash).toString();
-			const yourHash = new Block(myEmail).toHash().toString();
+			const yourHash = testBlock.toHash().toString();
 			assert.equal(myHash, yourHash);
 	})
 });

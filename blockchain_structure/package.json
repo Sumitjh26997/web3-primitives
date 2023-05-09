@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "author": "Sumitjh26997",
   "license": "ISC",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.7",
+    "faker": "^5.5.3",
     "mocha": "^10.2.0"
   }
 }

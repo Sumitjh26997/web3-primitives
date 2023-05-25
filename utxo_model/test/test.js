@@ -107,4 +107,46 @@ describe('Transaction', function () {
 					assert(ex, "Did not throw an exception for a lack of UTXO funds!");
 			});
 	});
+
+		const stxo1 = new TXO(fromAddress, 5);
+    const stxo2 = new TXO(fromAddress, 5);
+    const stxo3 = new TXO(fromAddress, 3);
+    const stxo4 = new TXO(fromAddress, 4);
+    const soutputTXO1 = new TXO(toAddress, 7);
+    const soutputTXO2 = new TXO(fromAddress, 3); 
+
+    it('should mark both inputs as spent', () => {
+        const tx = new Transaction([stxo1, stxo2], [soutputTXO1, soutputTXO2]);
+        tx.execute();
+        assert(stxo1.spent);
+        assert(stxo2.spent);
+    });
+
+    it('should leave both inputs unspent if funds unavailable', () => {
+        const tx = new Transaction([stxo3, stxo4], [soutputTXO1, soutputTXO2]);
+        let ex;
+        try {
+            tx.execute();
+        }
+        catch (_ex) {
+            ex = _ex;
+        }
+        assert(ex, "Expected an exception to be thrown!");
+        assert(!stxo3.spent, "The transaction should be marked as unspent");
+        assert(!stxo4.spent, "The transaction should be marked as unspent");
+    });
+
+    it('should leave valid inputs unspent if a double spend occurs', () => {
+        const tx = new Transaction([stxo1, stxo4], [soutputTXO1, soutputTXO2]);
+        let ex;
+        try {
+            tx.execute();
+        }
+        catch (_ex) {
+            ex = _ex;
+        }
+        assert(ex, "Expected an exception to be thrown!");
+        assert(!stxo4.spent, "The transaction should be marked as unspent");
+    });
+
 });

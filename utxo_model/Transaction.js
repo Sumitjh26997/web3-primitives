@@ -21,6 +21,10 @@ class Transaction {
 			if(inputValue < outputValue) {
 					throw new Error("Insufficient Balance");
 			}
+
+			this.inputUTXOs.map(inputUTXO => {
+				inputUTXO.spent = true;
+		});
 	}
 }
 

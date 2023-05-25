@@ -24,7 +24,9 @@ class Transaction {
 
 			this.inputUTXOs.map(inputUTXO => {
 				inputUTXO.spent = true;
-		});
+			});
+
+			this.fee = inputValue <= outputValue ? 0 : inputValue - outputValue;
 	}
 }
 
